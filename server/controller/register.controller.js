@@ -8,19 +8,13 @@ module.exports.registerStaff = async (req, res) => {
         const username = req.body.username
         const password = await bcrypt.hash(req.body.password, 10)
         const name = req.body.name
-        const phone= req.body.phone
-        const email = req.body.email
         const role = 'staff'
-        console.log(username)
         const newUser = new User({
             username: username,
             password: password,
-            name: name,
-            phone: phone,
-            email: email,
+            fullname: name,
             roll: role
         })
-        console.log(newUser)
         const saveUser = await newUser.save();
         if (saveUser){
             res.status(200).send('Register success');
@@ -29,7 +23,6 @@ module.exports.registerStaff = async (req, res) => {
         }
     }catch (err) {
         return res.status(400).send(err);
-        console.log(err);
     }
 }
 module.exports.registerManage = async (req, res) => {
@@ -37,18 +30,13 @@ module.exports.registerManage = async (req, res) => {
         const username = req.body.username
         const password = await bcrypt.hash(req.body.password, 10)
         const name = req.body.name
-        const phone= req.body.phone
-        const email = req.body.email
         const role = 'manage'
         const newUser = new User({
             username: username,
             password: password,
-            name: name,
-            phone: phone,
-            email: email,
+            fullname: name,
             roll: role
         })
-        console.log(newUser)
         const saveUser = await newUser.save();
         if (saveUser){
             res.status(200).send('Register success');
@@ -57,6 +45,5 @@ module.exports.registerManage = async (req, res) => {
         }
     }catch (err) {
         return res.status(400).send(err);
-        console.log(err);
     }
 }

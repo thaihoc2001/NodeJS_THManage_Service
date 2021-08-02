@@ -1,8 +1,11 @@
 require('dotenv').config();
 const express = require("express")
 const mongoose = require("mongoose")
+const cors = require('cors');
 const app = express()
 
+
+app.use(cors());
 app.use(express.json());
 app.get('/', (req, res) => {
     res.send('Welcome to THService');
@@ -11,10 +14,12 @@ app.get('/', (req, res) => {
 const LoginRouter = require('./server/router/login.router');
 const RegisterRouter = require('./server/router/register.router');
 const UserRouter = require('./server/router/user.router');
+const StaffRouter = require('./server/router/staff.router');
 
 app.use('/api/auth/login', LoginRouter);
-app.use('/api/auth/register', RegisterRouter)
-app.use('/user', UserRouter)
+app.use('/api/auth/register', RegisterRouter);
+app.use('/user', UserRouter);
+app.use('/staff', StaffRouter);
 
 
 // ket noi mongodb
